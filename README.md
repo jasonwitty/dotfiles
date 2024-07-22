@@ -30,10 +30,10 @@ Fish Shell
 pacman -S fish
 ```
 
-Pfetch
+Pfetch-rs (requires rustup - https://rustup.rs/)
 
 ```
-pacman -S pfetch
+cargo install pfetch
 ```
 
 eza zoxide and fzf
