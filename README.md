@@ -1,3 +1,6 @@
+![image](Screenshot_20240804_154227.png) – 
+
+
 # prerequisites
 
 FiraCode Nerd Font Mono
