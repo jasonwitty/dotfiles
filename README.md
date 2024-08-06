@@ -44,3 +44,14 @@ eza zoxide and fzf
 ```
 pacman -S eza zoxide fzf
 ```
+
+## notes for fedora
+
+install prereq
+
+```
+sudo dnf install fira-code-fonts
+sudo dnf install eza zoxide fzf fish
+```
+
+modify .config/alacritty/alacritty.toml and change fonts to Firacode (remove Nerd Mono)
