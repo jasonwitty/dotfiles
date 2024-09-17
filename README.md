@@ -55,3 +55,14 @@ sudo dnf install eza zoxide fzf fish
 ```
 
 modify .config/alacritty/alacritty.toml and change fonts to Firacode (remove Nerd Mono)
+
+## notes for debian
+
+```
+sudo nala install fonts-firacode fish zoxide fzf ugrep 
+
+cargo install --locked bat
+cargo install pfetch-rs
+cargo install eza
+
+```
