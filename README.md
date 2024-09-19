@@ -66,3 +66,35 @@ cargo install pfetch-rs
 cargo install eza
 
 ```
+
+## notes for MACOS
+
+```
+brew install wezterm
+brew install ugrep
+brew install starship
+brew install --cask alacritty --no-quarantine
+brew install --cask font-hack-nerd-font
+brew install bat
+
+cat ~/.wezterm.lua
+File: /Users/jasonwitty/.wezterm.lua
+-- Pull in the wezterm API
+local wezterm = require 'wezterm'
+
+-- This will hold the configuration.
+local config = wezterm.config_builder()
+
+-- This is where you actually apply your config choices
+
+-- For example, changing the color scheme:
+config.color_scheme = 'Dracula'
+
+config.window_background_opacity = 0.7
+
+config.font = wezterm.font 'FiraCode Nerd Font Mono'
+
+-- and finally, return the configuration to wezterm
+return config
+
+```
