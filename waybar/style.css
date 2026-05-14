@@ -1,0 +1,67 @@
+/*
+# @import "layouts/compact-pill.css";
+ WaybarConf Layout CSS */
+
+#clock, #cpu, #battery, #backlight, #pulseaudio, #network, #memory, #tray, #idle_inhibitor, #bluetooth, #cava, #disk, #temperature, #upower, #wireplumber, #mpris, #mpd, #backlight-slider, #pulseaudio-slider, #power-profiles-daemon, #privacy, #load, #jack, #sndio, #systemd-failed-units, #user, .user, .cpu, .load, #cffi, #gamemode, #inhibitor, #image, #keyboard-state, #workspaces, #taskbar, #wlr-taskbar, #hyprland-workspaces, #hyprland-window, #hyprland-submap, #hyprland-language, #sway-workspaces, #sway-window, #sway-mode, #sway-scratchpad, #niri-workspaces, #niri-window, #river-tags, #river-window, #river-mode, #river-layout, #dwl-tags, #dwl-window, #window, #mode, #scratchpad, #tags, #layout, #language, #submap, .custom {
+    padding: 4px 8px;
+    margin: 0 4px;
+    background: @module_bg;
+    color: @module_fg;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+@keyframes blink {
+    to {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: @module_fg;
+    }
+}
+
+@keyframes glow_pulse {
+    0% { background-color: @module_bg; }
+    50% { background-color: @hover_bg; }
+    100% { background-color: @module_bg; }
+}
+
+@keyframes lift {
+    to { margin-top: -2px; }
+}
+
+@keyframes bounce {
+    0% { margin-top: 0; }
+    50% { margin-top: -5px; }
+    100% { margin-top: 0; }
+}
+
+@keyframes shiver {
+    0% { margin-left: 0; }
+    25% { margin-left: -2px; }
+    75% { margin-left: 2px; }
+    100% { margin-left: 0; }
+}
+
+@keyframes rainbow {
+    0% { color: #ff0000; }
+    16% { color: #ff7f00; }
+    33% { color: #ffff00; }
+    50% { color: #00ff00; }
+    66% { color: #0000ff; }
+    83% { color: #4b0082; }
+    100% { color: #9400d3; }
+}
+
+@keyframes spin {
+    from { margin-left: 0; }
+    to { margin-left: 0.1px; } 
+}
+
+@keyframes shake {
+    0% { margin-left: 0; }
+    10% { margin-left: -4px; }
+    30% { margin-left: 4px; }
+    50% { margin-left: -4px; }
+    70% { margin-left: 4px; }
+    90% { margin-left: -4px; }
+    100% { margin-left: 0; }
+}
