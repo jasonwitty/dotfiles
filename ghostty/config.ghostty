@@ -1,5 +1,8 @@
 background-opacity = .85
-shell-integration = fish
+
+command = /usr/bin/fish
+shell-integration = fish   
+
 window-decoration = none
 palette = 0=#51576d
 palette = 1=#e78284
