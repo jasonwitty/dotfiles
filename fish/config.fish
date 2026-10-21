@@ -200,7 +200,7 @@ set -Ux VISUAL nvim
 status is-interactive; and pfetch
 starship init fish | source
 zoxide init --cmd cd fish | source
-atuin init fish --disable-up-arrow | source
+atuin init fish | source
 
 # Starship/fish prompt repaint fixes
 # Ensure consistent width handling for emojis/ambiguous glyphs
