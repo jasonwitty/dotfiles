@@ -197,7 +197,7 @@ export PF_ASCII="arch"
 set -Ux EDITOR nvim
 set -Ux VISUAL nvim
 
-pfetch
+status is-interactive; and pfetch
 starship init fish | source
 zoxide init --cmd cd fish | source
 atuin init fish --disable-up-arrow | source
