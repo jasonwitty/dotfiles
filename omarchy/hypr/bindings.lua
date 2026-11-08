@@ -157,3 +157,30 @@ for slot = 1, 10 do
     o.bind("SUPER + CTRL + ALT + " .. key, "Bar panel " .. slot, "omarchy-shell -q shell togglePanelAt right " .. slot)
   end
 end
+
+-- COSMIC-style vertical workspace scrolling: SUPER+UP/DOWN step through this
+-- monitor's own workspaces 1-10. Down stops one past the last workspace with
+-- windows, so there's always exactly one empty workspace "below".
+-- (Replaces Omarchy's focus-window-up/down; ALT+TAB still cycles windows.)
+local function workspace_step(delta)
+  return function()
+    local monitor = hl.get_active_monitor()
+    if not monitor then return end
+    local base = o.workspaces.workspace_id(monitor, 1) - 1
+    local active = monitor.active_workspace
+    local slot = (active and active.id > base and active.id <= base + 10) and (active.id - base) or 1
+
+    local last_used = 0
+    for s = 1, 10 do
+      local ws = hl.get_workspace(base + s)
+      if ws and (ws.windows or 0) > 0 then last_used = s end
+    end
+
+    local target = slot + delta
+    if target < 1 then return end
+    if target > math.min(10, math.max(last_used, slot) + 1) then return end
+    o.workspaces.focus(target)()
+  end
+end
+o.rebind("SUPER + UP", "Previous workspace on this monitor", workspace_step(-1))
+o.rebind("SUPER + DOWN", "Next workspace on this monitor", workspace_step(1))
