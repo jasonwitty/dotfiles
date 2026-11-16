@@ -1,0 +1,117 @@
+# AeroSpace config, modelled on hypr/conf/keybindings/default.conf
+# Main modifier: alt (Option) stands in for Hyprland's SUPER.
+config-version = 2
+
+start-at-login = true
+auto-reload-config = false
+
+# Window borders (Hyprland border_size = 2). Needs JankyBorders:
+#   brew tap FelixKratz/formulae && brew install borders
+# Does nothing until it is installed.
+after-startup-command = [
+    'exec-and-forget /opt/homebrew/bin/borders active_color=0xffc6d0f5 inactive_color=0xff8caaee width=3.0',
+]
+
+# Closest match to Hyprland's dwindle layout: tiles, nested splits alternate direction
+default-root-container-layout = 'tiles'
+default-root-container-orientation = 'auto'
+enable-normalization-flatten-containers = true
+enable-normalization-opposite-orientation-for-nested-containers = true
+accordion-padding = 30
+
+on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+automatically-unhide-macos-hidden-apps = false
+key-mapping.preset = 'qwerty'
+
+# Hyprland: workspaces 1-10, persistent
+persistent-workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+
+# Hyprland: gaps_in = 10, gaps_out = 20
+[gaps]
+    inner.horizontal = 10
+    inner.vertical   = 10
+    outer.left       = 20
+    outer.bottom     = 20
+    outer.top        = 20
+    outer.right      = 20
+
+[mode.main.binding]
+    # --- Applications ---------------------------------------------------
+    # SUPER+RETURN: terminal (new window in the running Ghostty, or launch it)
+    alt-enter = '''exec-and-forget osascript -e 'if application "Ghostty" is running then' -e 'tell application "Ghostty" to new window' -e 'else' -e 'tell application "Ghostty" to activate' -e 'end if' '''
+    # SUPER+B: browser
+    alt-b = 'exec-and-forget open -na "Brave Browser" --args --new-window'
+    # SUPER+E: file manager
+    alt-e = 'exec-and-forget open ~'
+
+    # --- Windows --------------------------------------------------------
+    # SUPER+Q: close window / SUPER+SHIFT+Q: kill the whole app
+    # Ghostty has no close button with window-decoration = none, so AeroSpace's
+    # 'close' silently does nothing there; ask Ghostty to close its own window.
+    alt-q = '''exec-and-forget if [ "$(/opt/homebrew/bin/aerospace list-windows --focused --format '%{app-bundle-id}')" = com.mitchellh.ghostty ]; then osascript -e 'tell application "Ghostty" to close window (front window)'; else /opt/homebrew/bin/aerospace close; fi'''
+    alt-shift-q = '''exec-and-forget /opt/homebrew/bin/aerospace list-windows --focused --format '%{app-pid}' | xargs kill'''
+    # SUPER+F: fullscreen / SUPER+M: maximize (keeps the outer gaps)
+    alt-f = 'fullscreen --no-outer-gaps'
+    alt-m = 'fullscreen'
+    # SUPER+T: toggle floating
+    alt-t = 'layout floating tiling'
+    # SUPER+J: toggle split direction / SUPER+K: swap with the next window
+    alt-j = 'layout tiles horizontal vertical'
+    alt-k = 'swap dfs-next --wrap-around'
+    # SUPER+G: toggle group (accordion is AeroSpace's stacked layout)
+    alt-g = 'layout accordion tiles'
+
+    # SUPER+left/right: move focus sideways. Up/down focus is on CTRL+ALT
+    # because ALT+up/down cycle workspaces (see Workspaces below).
+    alt-left  = 'focus left'
+    alt-right = 'focus right'
+    ctrl-alt-down = 'focus down'
+    ctrl-alt-up   = 'focus up'
+
+    # SUPER+SHIFT+arrows: resize by 100
+    alt-shift-right = 'resize width +100'
+    alt-shift-left  = 'resize width -100'
+    alt-shift-down  = 'resize height +100'
+    alt-shift-up    = 'resize height -100'
+
+    # SUPER+ALT+arrows in Hyprland (swap window); here CTRL+ALT+left/right moves
+    # the window sideways, and CTRL+ALT+SHIFT+up/down moves it vertically
+    # (CTRL+ALT+up/down are focus).
+    ctrl-alt-left  = 'move left'
+    ctrl-alt-right = 'move right'
+    ctrl-alt-shift-down = 'move down'
+    ctrl-alt-shift-up   = 'move up'
+
+    # --- Actions --------------------------------------------------------
+    # SUPER+CTRL+R / SUPER+SHIFT+R: reload config
+    ctrl-alt-r  = 'reload-config'
+    alt-shift-r = 'reload-config'
+    # SUPER+CTRL+L: lock screen (sleeps the display)
+    ctrl-alt-l = 'exec-and-forget pmset displaysleepnow'
+
+    # --- Workspaces -----------------------------------------------------
+    # ALT+up/down: scroll through workspaces, wrapping at the ends
+    alt-up   = 'workspace --wrap-around prev'
+    alt-down = 'workspace --wrap-around next'
+
+    alt-1 = 'workspace 1'
+    alt-2 = 'workspace 2'
+    alt-3 = 'workspace 3'
+    alt-4 = 'workspace 4'
+    alt-5 = 'workspace 5'
+    alt-6 = 'workspace 6'
+    alt-7 = 'workspace 7'
+    alt-8 = 'workspace 8'
+    alt-9 = 'workspace 9'
+    alt-0 = 'workspace 10'
+
+    alt-shift-1 = 'move-node-to-workspace 1'
+    alt-shift-2 = 'move-node-to-workspace 2'
+    alt-shift-3 = 'move-node-to-workspace 3'
+    alt-shift-4 = 'move-node-to-workspace 4'
+    alt-shift-5 = 'move-node-to-workspace 5'
+    alt-shift-6 = 'move-node-to-workspace 6'
+    alt-shift-7 = 'move-node-to-workspace 7'
+    alt-shift-8 = 'move-node-to-workspace 8'
+    alt-shift-9 = 'move-node-to-workspace 9'
+    alt-shift-0 = 'move-node-to-workspace 10'

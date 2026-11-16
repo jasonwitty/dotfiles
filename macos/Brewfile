@@ -1,0 +1,27 @@
+# macOS packages for this setup. Install with: brew bundle --file macos/Brewfile
+tap "nikitabobko/tap"        # AeroSpace
+tap "felixkratz/formulae"    # JankyBorders
+
+# Window manager, borders, terminal
+cask "aerospace"
+brew "borders"
+cask "ghostty"
+cask "font-hack-nerd-font"
+
+# Shell and prompt
+brew "fish"
+brew "starship"
+brew "zoxide"
+brew "fzf"
+brew "tmux"
+
+# Tools the fish config aliases or calls
+brew "eza"        # ls, la, ll, lt
+brew "bat"        # cat, man pager
+brew "ugrep"      # grep, egrep, fgrep
+
+# Extras installed on this machine
+brew "micro"
+brew "fastfetch"
+brew "lazygit"
+brew "gh"

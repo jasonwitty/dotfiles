@@ -1,7 +1,31 @@
-![image](Screenshot_20240804_154227.png) – 
+# dotfiles
 
+My terminal and desktop configs: fish + starship in the shell, Hyprland and
+Waybar on Linux, AeroSpace on macOS, in Catppuccin Frappé and Dracula.
 
-# prerequisites
+![Linux desktop](Screenshot_20240804_154227.png)
+
+**On a Mac?** The MacBook setup has its own folder, install guide and
+screenshots: [`macos/`](macos/README.md).
+
+## What is in here
+
+| Path | What it is |
+| --- | --- |
+| `fish/` | fish shell config, plugins (fisher, done) and themes |
+| `starship.toml` | Prompt, shared by Linux and macOS |
+| `bash/.bashrc` | Minimal bash config |
+| `ghostty/` | Ghostty terminal (Linux; the macOS variant is in `macos/`) |
+| `alacritty/` | Alacritty terminal with Catppuccin Frappé and Dracula themes |
+| `.wezterm.lua` | WezTerm config (older, kept for reference) |
+| `hypr/` | Hyprland, based on [ML4W](https://github.com/mylinuxforwork/dotfiles) with Catppuccin Frappé/Mauve customizations |
+| `waybar/` | Waybar themes to match |
+| `conky.conf` | Conky system monitor |
+| `macos/` | AeroSpace, Ghostty, fish and tmux for a MacBook |
+
+## Linux prerequisites
+
+The commands below are for Arch; notes for other distros follow.
 
 FiraCode Nerd Font Mono
 
@@ -15,86 +39,66 @@ Starship
 curl -sS https://starship.rs/install.sh | sh
 ```
 
-Alacritty
+Alacritty and its themes
 
 ```
 pacman -S alacritty
-```
-
-Alacritty Themes
-
-```
 yay -S alacritty-themes
 ```
 
-Fish Shell
+Fish shell
 
 ```
 pacman -S fish
 ```
 
-Pfetch-rs (requires rustup - https://rustup.rs/)
+pfetch-rs (requires rustup: https://rustup.rs/)
 
 ```
 cargo install pfetch
 ```
 
-eza zoxide and fzf
+eza, zoxide, fzf, bat and ugrep (used by the aliases in `fish/config.fish`)
 
 ```
-pacman -S eza zoxide fzf
+pacman -S eza zoxide fzf bat ugrep
 ```
 
-## notes for fedora
+atuin (shell history; `config.fish` initialises it)
 
-install prereq
+```
+curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
+```
+
+Then link or copy the configs into `~/.config` (`fish/`, `ghostty/`,
+`alacritty/`, `hypr/`, `waybar/`, `starship.toml`).
+
+### Notes for Fedora
 
 ```
 sudo dnf install fira-code-fonts
 sudo dnf install eza zoxide fzf fish
 ```
 
-modify .config/alacritty/alacritty.toml and change fonts to Firacode (remove Nerd Mono)
+Modify `.config/alacritty/alacritty.toml` and change the font to Firacode
+(remove Nerd Mono).
 
-## notes for debian
+### Notes for Debian
 
 ```
-sudo nala install fonts-firacode fish zoxide fzf ugrep 
+sudo nala install fonts-firacode fish zoxide fzf ugrep
 
 cargo install --locked bat
 cargo install pfetch-rs
 cargo install eza
-
 ```
 
-## notes for MACOS
+## macOS
 
-```
-brew install wezterm
-brew install ugrep
-brew install starship
-brew install --cask alacritty --no-quarantine
-brew install --cask font-hack-nerd-font
-brew install bat
+See [`macos/README.md`](macos/README.md) for the current setup: what to
+install, how to link the configs, the key bindings, and a prompt that lets
+Claude Code do the installation.
 
-cat ~/.wezterm.lua
-File: /Users/jasonwitty/.wezterm.lua
--- Pull in the wezterm API
-local wezterm = require 'wezterm'
-
--- This will hold the configuration.
-local config = wezterm.config_builder()
-
--- This is where you actually apply your config choices
-
--- For example, changing the color scheme:
-config.color_scheme = 'Dracula'
-
-config.window_background_opacity = 0.7
-
-config.font = wezterm.font 'FiraCode Nerd Font Mono'
-
--- and finally, return the configuration to wezterm
-return config
-
-```
+The earlier macOS notes (WezTerm and Alacritty installed through Homebrew)
+are superseded by that guide. The WezTerm config from that setup is still
+here as `.wezterm.lua`.
