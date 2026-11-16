@@ -20,8 +20,14 @@ brew "eza"        # ls, la, ll, lt
 brew "bat"        # cat, man pager
 brew "ugrep"      # grep, egrep, fgrep
 
+# Neovim (LazyVim) and what it needs
+brew "neovim"
+brew "ripgrep"          # live grep
+brew "fd"               # file finder
+brew "tree-sitter-cli"  # builds syntax parsers
+brew "lazygit"          # Space g g
+
 # Extras installed on this machine
 brew "micro"
 brew "fastfetch"
-brew "lazygit"
 brew "gh"

@@ -189,6 +189,15 @@ alias rip 'expac --timefmt="%Y-%m-%d %T" "%l\t%n %v" | sort | tail -200 | nl'
 #end
 #replace with pfetch for more minimal
 
+# n: open Neovim on the current directory, or on the given files (as in Omarchy)
+function n
+    if test (count $argv) -eq 0
+        nvim .
+    else
+        nvim $argv
+    end
+end
+
 #set default editor to nvim
 set -Ux EDITOR nvim
 set -Ux VISUAL nvim

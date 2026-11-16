@@ -17,6 +17,7 @@ with Option standing in for Super.
 | `ghostty/config.ghostty` | `~/.config/ghostty/config.ghostty` | Terminal: fish, no title bar, Frappé palette |
 | `fish/config.fish` | `~/.config/fish/config.fish` | Shell config (macOS variant of `../fish/config.fish`) |
 | `tmux/tmux.conf` | `~/.config/tmux/tmux.conf` | Self-contained tmux theme and keys, no plugin manager |
+| `nvim/` | `~/.config/nvim` | Neovim: LazyVim with Omarchy's additions (see [Neovim](#neovim)) |
 | `Brewfile` | | Everything installed through Homebrew |
 
 These are shared with the Linux setup and linked from the repo root:
@@ -59,6 +60,7 @@ These are shared with the Linux setup and linked from the repo root:
    ln -sfn $D/macos/ghostty/config.ghostty   ~/.config/ghostty/config.ghostty
    ln -sfn $D/macos/fish/config.fish         ~/.config/fish/config.fish
    ln -sfn $D/macos/tmux/tmux.conf           ~/.config/tmux/tmux.conf
+   ln -sfn $D/macos/nvim                     ~/.config/nvim
 
    ln -sfn $D/starship.toml                  ~/.config/starship.toml
    ln -sfn $D/fish/fish_plugins              ~/.config/fish/fish_plugins
@@ -81,10 +83,41 @@ Notes:
   Option+Shift+R (or run `aerospace reload-config`).
 - The Ghostty config assumes Apple Silicon Homebrew (`/opt/homebrew`). On an
   Intel Mac change `command` to `/usr/local/bin/fish`.
-- `config.fish` sets `EDITOR` to `nvim`; install it (`brew install neovim`) or
-  change those two lines.
 - Many aliases in `config.fish` are Arch leftovers (`pacman`, `reflector`,
   `expac`) and do nothing useful on macOS.
+
+## Neovim
+
+`nvim/` is [LazyVim](https://www.lazyvim.org) set up the way
+[Omarchy](https://omarchy.org) ships it: the LazyVim starter plus the files
+from Omarchy's `omarchy-nvim` package.
+
+- Neo-tree file explorer (LazyVim extra)
+- Transparent background, including the status line, so the terminal's
+  opacity shows through
+- Every Omarchy colour scheme installed; `lua/plugins/theme.lua` picks the
+  active one (Catppuccin Frappé here, where Omarchy links its desktop theme)
+- Scroll animation off, relative line numbers off, format-on-save off, no
+  news popups
+
+The first `nvim` start downloads the plugins and syntax parsers, which takes a
+minute and needs network access. `:Lazy` manages plugins, `:LazyExtras` adds
+language support, `:checkhealth` reports anything missing. In fish, `n` opens
+Neovim on the current directory and `n file` opens a file.
+
+Two differences from Omarchy: its Linux clipboard bridge
+(`lua/config/remote_clipboard.lua`) is skipped on macOS, where Neovim uses the
+system clipboard directly, and themes do not follow a desktop theme switcher.
+
+| Keys | Action |
+| --- | --- |
+| Space | Leader: wait a moment for the menu of commands |
+| Space Space | Find a file |
+| Space S G | Search file contents |
+| Space E | Toggle the file tree |
+| Shift+H / Shift+L | Previous / next buffer |
+| Space B D | Close the buffer |
+| Space G G | LazyGit |
 
 ## Keys
 
@@ -131,7 +164,8 @@ https://github.com/jasonwitty/dotfiles exactly.
    and is not a symlink into ~/dotfiles, show me the difference and ask before
    replacing it; never delete a file without a backup.
 4. Check the result: fish parses its config, `aerospace reload-config`
-   succeeds, `ghostty +validate-config` passes, and tmux loads its config.
+   succeeds, `ghostty +validate-config` passes, tmux loads its config, and
+   `nvim --headless "+Lazy! sync" +qa` finishes without errors.
 5. Tell me what I still have to do by hand (granting AeroSpace Accessibility
    access, opening Ghostty) and list anything that failed or that you skipped.
 
